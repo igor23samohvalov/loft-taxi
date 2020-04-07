@@ -1,38 +1,75 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+  color: blue;
+  text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.main-container {
+  width: 100%;
+  height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#authorization, #registration {
+  position: absolute;
+  top:30%;
+  right: 20%;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
+  width: 500px;
+  height: 300px;
+  padding: 44px 60px;
+  border: 1px solid #333;
+}
+
+#authorization button, #registration button{
+  padding: 5px 15px;
+  align-self: flex-end;
+}
+
+header {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: flex-end;
+  width: 100%;
+  height: 70px;
+  padding: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+header a {
+  color: #333;
+  padding-right: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.profile-container {
+  width: 752px;
+  padding: 44px 60px;
+  margin: auto;
+  border: 1px solid #333;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 632px;
+  height: 369px;
+}
+
+#profileForm {
+  display: flex;
+  align-content: space-around;
+}
+
+#profileForm div{
+  width: 236px;
+  height: 157px;
+  padding: 16px 32px;
+  border: 1px solid #333;
 }
