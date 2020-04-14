@@ -6,14 +6,14 @@ class Registration extends React.Component {
         return (
             <form action='' id='registration' href='#'>
                 <legend>Регистрация</legend>
-                <p>Уже зарегистрированы? <a href='#' onClick={this.props.onAuthorization}>Войти</a></p>
+                <p>Уже зарегистрированы? <a href='#' data-id='1' onClick={this.props.onClick}>Войти</a></p>
                 <input type='text' placeholder='Адрес электронной почты*'></input>
                 <div>
                     <input type='text' placeholder='Имя*'></input>
                     <input type='text' placeholder='Фамилия*'></input>
                 </div>
                 <input type='text' placeholder='Пароль*'></input>
-                <button type='submit' form='registration' onClick={this.props.onAuthorization}>Зарегистрироваться</button>
+                <button type='submit' form='registration' data-id='1' onClick={this.props.onClick}>Зарегистрироваться</button>
             </form>
        )
     }
