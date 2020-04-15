@@ -2,12 +2,49 @@ import React from 'react';
 import './header.css';
 
 class Header extends React.Component {
+
+    handleLinkClick = (event) => {
+        const {target} = event;
+
+        const {onClick} = this.props;
+
+        if (target && onClick) {
+            onClick(event)
+        }
+    }
+
     render () {
+        const links = [
+            {
+                'key': '1',
+                'href': '#map',
+                'dataId': 'toMap',
+                'value': 'Карта'
+            },
+            {
+                'key': '2',
+                'href': '#profile',
+                'dataId': 'toProfile',
+                'value': 'Профиль'
+            },
+            {
+                'key': '3',
+                'href': '#',
+                'dataId': 'toLogScreen',
+                'value': 'Выйти'
+            }
+        ]
+        
         return (
             <header>
-                <a href='#map' data-id='3' onClick={this.props.onClick}>Карта</a>
-                <a href='#profile' data-id='4' onClick={this.props.onClick}>Профиль</a>
-                <a href='#' data-id='1' onClick={this.props.onClick}>Выйти</a>
+                {links.map((link) => {
+                    return <a key={link.key} 
+                              href={link.href} 
+                              data-id={link.dataId} 
+                              onClick={this.handleLinkClick}
+                              >{link.value}
+                           </a>
+                })}
             </header>
         )
     }

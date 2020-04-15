@@ -1,13 +1,12 @@
 import React from 'react';
-import Authorization from './components/authorization/authorization.js';
-import Registration from './components/registration/registration.js';
+import LogScreen from './components/logscreen/logscreen.js';
 import Map from './components/map/map.js';
 import Profile from './components/profile/profile.js';
 import './App.css';
 
 class App extends React.Component {
     state = {
-        page: '1'
+        page: 'toLogScreen'
     }
 
     pageHandler = (e) => {
@@ -17,17 +16,32 @@ class App extends React.Component {
     }
 
     render() {
+        const pages = [
+            {
+                'id': 'toLogScreen',
+                'name': LogScreen,
+                'listener': this.pageHandler
+            },
+            {
+                'id': 'toMap',
+                'name': Map,
+                'listener': this.pageHandler
+            },
+            {
+                'id': 'toProfile',
+                'name': Profile,
+                'listener': this.pageHandler
+            }
+        ]
+
         let Screen;
-        
-        if (this.state.page === '1') {
-            Screen = <Authorization onClick={this.pageHandler}/>;
-        } else if (this.state.page === '2') {
-            Screen = <Registration onClick={this.pageHandler}/>
-        } else if (this.state.page === '3') {
-            Screen = <Map onClick={this.pageHandler}/>
-        } else if (this.state.page === '4') {
-            Screen = <Profile onClick={this.pageHandler}/>
+
+        for (let page of pages) {
+            if (this.state.page === page.id) {
+                Screen = <page.name onClick={page.listener}/>
+            }
         }
+
         return (
           <div className='main-container'>
               {Screen}

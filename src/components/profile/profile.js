@@ -5,7 +5,7 @@ import './profile.css';
 class Profile extends React.Component {
     render() {
         return (
-            <React.Fragment>
+            <div>
                 <Header onClick={this.props.onClick}/>
                 <div className='profile-container'>
                     <div className='profile'>
@@ -28,7 +28,7 @@ class Profile extends React.Component {
                         <button type='submit'>Сохранить</button>
                     </div>
                 </div>
-            </React.Fragment>
+            </div>
        )
     }
 }

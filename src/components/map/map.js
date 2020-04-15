@@ -5,12 +5,12 @@ import './map.css';
 class Map extends React.Component {
     render() {
         return (
-            <React.Fragment>
+            <div>
                 <Header onClick={this.props.onClick}/>
                 <div>
                     MAP
                 </div>
-            </React.Fragment>
+            </div>
        )
     }
 }
