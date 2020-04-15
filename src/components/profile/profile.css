@@ -1,0 +1,27 @@
+.profile-container {
+    width: 752px;
+    padding: 44px 60px;
+    margin: auto;
+    border: 1px solid #333;
+  }
+  
+  .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 632px;
+    height: 369px;
+  }
+  
+  #profileForm {
+    display: flex;
+    align-content: space-around;
+  }
+  
+  #profileForm div{
+    width: 236px;
+    height: 157px;
+    padding: 16px 32px;
+    border: 1px solid #333;
+  }

@@ -1,26 +1,53 @@
 import React from 'react';
-import logo from './logo.svg';
+import LogScreen from './components/logscreen/logscreen.js';
+import Map from './components/map/map.js';
+import Profile from './components/profile/profile.js';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    state = {
+        page: 'toLogScreen'
+    }
+
+    pageHandler = (e) => {
+        this.setState({
+            page: e.target.dataset.id
+        })
+    }
+
+    render() {
+        const pages = [
+            {
+                'id': 'toLogScreen',
+                'name': LogScreen,
+                'listener': this.pageHandler
+            },
+            {
+                'id': 'toMap',
+                'name': Map,
+                'listener': this.pageHandler
+            },
+            {
+                'id': 'toProfile',
+                'name': Profile,
+                'listener': this.pageHandler
+            }
+        ]
+
+        let Screen;
+
+        for (let page of pages) {
+            if (this.state.page === page.id) {
+                Screen = <page.name onClick={page.listener}/>
+            }
+        }
+
+        return (
+          <div className='main-container'>
+              {Screen}
+          </div>
+        )
+    };
 }
 
 export default App;
