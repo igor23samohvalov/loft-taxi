@@ -1,34 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Authorization from '../authorization/authorization.js';
 import Registration from '../registration/registration.js';
 import './logscreen.css';
+import PropTypes from 'prop-types';
 
-class LogScreen extends React.Component {
-    state = {
-        page: 'toAuthorization'
+const loginPages = {
+    'toAuthorization': Authorization,
+    'toRegistration': Registration
+}
+
+function LogScreen(props) {
+    const [page, setPage] = useState('toAuthorization');
+    
+    let loginPageHandler = (e) => {
+        setPage(e.target.dataset.id)
     }
 
-    loginPageHandler = (e) => {
-        this.setState({
-            page: e.target.dataset.id
-        })
-    }
+    let CurrentLoginPage = loginPages[page];
 
-    render() {
-        let LoginScreen;
-        
-        if (this.state.page === 'toAuthorization') {
-            LoginScreen = <Authorization onClick={this.loginPageHandler} onMap={this.props.onClick}/>;
-        } else if (this.state.page === 'toRegistration') {
-            LoginScreen = <Registration onClick={this.loginPageHandler}/>;
-        }
+    return (
+        <div>
+            <CurrentLoginPage onClick={loginPageHandler} onMap={props.onClick}/>
+        </div>
+    )
+}
 
-        return (
-            <div>
-                {LoginScreen}
-            </div>
-        )
-    }
+LogScreen.propTypes = {
+    onClick: PropTypes.func.isRequired
 }
 
 export default LogScreen;

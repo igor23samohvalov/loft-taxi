@@ -1,53 +1,62 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './header.css';
+import PropTypes from 'prop-types';
+import { AuthContext } from '../../AuthContext';
+import {AppBar, Link} from '@material-ui/core'
 
-class Header extends React.Component {
+const links = [
+    {
+        'key': '1',
+        'href': '#map',
+        'dataId': 'toMap',
+        'value': 'Карта'
+    },
+    {
+        'key': '2',
+        'href': '#profile',
+        'dataId': 'toProfile',
+        'value': 'Профиль'
+    },
+    {
+        'key': '3',
+        'href': '#',
+        'dataId': 'toLogScreen',
+        'value': 'Выйти'
+    }
+]
 
-    handleLinkClick = (event) => {
+function Header(props) {
+    const value = useContext(AuthContext); 
+
+    let handleLinkClick = (event) => {
         const {target} = event;
 
-        const {onClick} = this.props;
+        const {onClick} = props;
 
         if (target && onClick) {
+            if (target.dataset.id === 'toLogScreen') {
+                value.logout();
+            } 
             onClick(event)
         }
     }
+    return (
+        <AppBar color="default">
+            {links.map((link) => {
+                return <Link key={link.key} 
+                        href={link.href} 
+                        data-id={link.dataId} 
+                        onClick={handleLinkClick}
+                        >{link.value}
+                    </Link>
+            })}
+        </AppBar>
+    )
+}
 
-    render () {
-        const links = [
-            {
-                'key': '1',
-                'href': '#map',
-                'dataId': 'toMap',
-                'value': 'Карта'
-            },
-            {
-                'key': '2',
-                'href': '#profile',
-                'dataId': 'toProfile',
-                'value': 'Профиль'
-            },
-            {
-                'key': '3',
-                'href': '#',
-                'dataId': 'toLogScreen',
-                'value': 'Выйти'
-            }
-        ]
-        
-        return (
-            <header>
-                {links.map((link) => {
-                    return <a key={link.key} 
-                              href={link.href} 
-                              data-id={link.dataId} 
-                              onClick={this.handleLinkClick}
-                              >{link.value}
-                           </a>
-                })}
-            </header>
-        )
-    }
+
+Header.propTypes = {
+    onClick: PropTypes.func.isRequired
 }
 
 export default Header

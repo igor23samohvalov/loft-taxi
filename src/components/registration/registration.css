@@ -9,9 +9,10 @@
     height: 300px;
     padding: 44px 60px;
     border: 1px solid #333;
+    background-color: #fff;
   }
 
-#registration button{
+/* #registration button{
     padding: 5px 15px;
     align-self: flex-end;
-  }
+  } */

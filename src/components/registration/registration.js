@@ -1,34 +1,38 @@
 import React from 'react';
 import './registration.css';
+import PropTypes from 'prop-types';
+import {Paper, Grid, Button, Link, TextField, Typography, Input} from '@material-ui/core'
 
-class Registration extends React.Component {
+function Registration(props) {
 
-    handleLinkClick = (event) => {
+    let handleLinkClick = (event) => {
         event.preventDefault();
         const {target} = event;
 
-        const {onClick} = this.props;
+        const {onClick} = props;
 
         if (target && onClick) {
             onClick(event)
         }
     }
 
-    render() {
-        return (
-            <form action='' id='registration' href='#'>
-                <legend>Регистрация</legend>
-                <p>Уже зарегистрированы? <a href='#' data-id='toAuthorization' onClick={this.handleLinkClick}>Войти</a></p>
-                <input type='text' placeholder='Адрес электронной почты*'></input>
-                <div>
-                    <input type='text' placeholder='Имя*'></input>
-                    <input type='text' placeholder='Фамилия*'></input>
-                </div>
-                <input type='text' placeholder='Пароль*'></input>
-                <button type='submit' form='registration' data-id='toAuthorization' onClick={this.handleLinkClick}>Зарегистрироваться</button>
-            </form>
-       )
-    }
+    return (
+        <form action='' id='registration' href='#'>
+            <Typography>Регистрация</Typography>
+            <p>Уже зарегистрированы? <Link href='#' data-id='toMap' onClick={props.onMap}>На карту без авторизации</Link></p>
+            <Input type='text' placeholder='Адрес электронной почты*'></Input>
+            <div>
+                <Input type='text' placeholder='Имя*'></Input>
+                <Input type='text' placeholder='Фамилия*'></Input>
+            </div>
+            <Input type='text' placeholder='Пароль*'></Input>
+            <button type='submit' form='registration' data-id='toAuthorization' onClick={handleLinkClick}>Зарегистрироваться</button>
+        </form>
+    )
+}
+
+Registration.propTypes = {
+    onClick: PropTypes.func.isRequired
 }
 
 export default Registration

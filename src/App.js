@@ -1,53 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import LogScreen from './components/logscreen/logscreen.js';
 import Map from './components/map/map.js';
 import Profile from './components/profile/profile.js';
 import './App.css';
 
-class App extends React.Component {
-    state = {
-        page: 'toLogScreen'
+const pages = {
+    'toLogScreen': LogScreen,
+    'toMap': Map,
+    'toProfile': Profile 
+}
+
+function App() {
+    const [page, setPage] = useState('toLogScreen');
+
+    let pageHandler = (e) => {
+        setPage(e.target.dataset.id)
+        console.log(e.target.dataset.id)
     }
 
-    pageHandler = (e) => {
-        this.setState({
-            page: e.target.dataset.id
-        })
-    }
+    let CurrentPage = pages[page];
 
-    render() {
-        const pages = [
-            {
-                'id': 'toLogScreen',
-                'name': LogScreen,
-                'listener': this.pageHandler
-            },
-            {
-                'id': 'toMap',
-                'name': Map,
-                'listener': this.pageHandler
-            },
-            {
-                'id': 'toProfile',
-                'name': Profile,
-                'listener': this.pageHandler
-            }
-        ]
-
-        let Screen;
-
-        for (let page of pages) {
-            if (this.state.page === page.id) {
-                Screen = <page.name onClick={page.listener}/>
-            }
-        }
-
-        return (
-          <div className='main-container'>
-              {Screen}
-          </div>
-        )
-    };
+    return (
+        <div className='main-container'>
+            <CurrentPage onClick={pageHandler}/>
+        </div>
+    )
 }
 
 export default App;
