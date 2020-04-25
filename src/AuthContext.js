@@ -1,4 +1,4 @@
-import React, {Component, createContext, useContext} from 'react'
+import React, {Component, createContext} from 'react'
 
 export const AuthContext = createContext({});
 

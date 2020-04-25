@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from '../header/header.js';
-import './profile.css';
 import {Paper, Grid, Button, FormLabel, Typography, TextField, FormControl} from '@material-ui/core'
 
 function Profile(props) {
+    
     return (
         <div data-testid='profTest'>
             <Header onSwitch={props.onSwitch}/>
@@ -12,7 +12,7 @@ function Profile(props) {
                 alignContent='center'
                 direction='column'
             >
-                <Paper className='profile-container'>
+                <Paper style={{padding: '44px 60px', marginTop: '60px'}}>
                     <Grid
                     container
                     alignItems='center'
@@ -21,13 +21,12 @@ function Profile(props) {
                             variant='h4'
                             >Профиль
                         </Typography>
-                        <p
-                            className='profile-pay'
-                            >Способ оплаты
-                        </p>
+                        <Typography variant='body1' style={{marginBottom: '40px'}}>
+                            Способ оплаты
+                        </Typography>
                         <form action='' href='#' id='profileForm'>
                             <Grid
-                                className='hey'
+                                style={{height: '320px'}}
                                 justify='space-between'
                                 container
                                 alignItems='center'
@@ -41,7 +40,7 @@ function Profile(props) {
                                 spacing={4}
                                 >
                                     <Grid item>
-                                        <Paper className='papers'>
+                                        <Paper style={{width: '324px', height: '190px', padding: '20px'}}>
                                             <FormControl fullWidth margin='normal'>
                                                 <FormLabel>Номер карты*</FormLabel>
                                                 <TextField 
@@ -59,7 +58,7 @@ function Profile(props) {
                                         </Paper>
                                     </Grid>
                                     <Grid item>                                    
-                                        <Paper className='papers'>
+                                        <Paper style={{width: '324px', height: '190px', padding: '20px'}}>
                                             <FormControl fullWidth margin='normal'>
                                                 <FormLabel>Имя владельца*</FormLabel>
                                                 <TextField 

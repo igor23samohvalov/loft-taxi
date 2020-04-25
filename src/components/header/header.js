@@ -1,9 +1,8 @@
 import React, {useContext} from 'react';
-import './header.css';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { AuthContext } from '../../AuthContext';
-import {AppBar, Toolbar, Button} from '@material-ui/core'
+import {AppBar, Toolbar, Button, Typography} from '@material-ui/core'
 import {Logo} from 'loft-taxi-mui-theme'
 
 const useStyles = makeStyles({
@@ -17,19 +16,16 @@ const links = [
     {
         'key': '1',
         'href': '#map',
-        'dataId': 'toMap',
         'value': 'Карта'
     },
     {
         'key': '2',
         'href': '#profile',
-        'dataId': 'toProfile',
         'value': 'Профиль'
     },
     {
         'key': '3',
         'href': '#',
-        'dataId': 'toLogScreen',
         'value': 'Выйти'
     }
 ]
@@ -48,23 +44,25 @@ function Header(props) {
             if (target.textContent === 'Выйти') {
                 value.logout();
             } else {
-                onSwitch(event)
+                onSwitch(target.textContent)
             }
         }
     }
 
     return (
         <AppBar color='inherit' position='static' classes={{root: classes.root}}>
-                <Logo />
+                <Typography style={{paddingLeft: '20px', alignSelf: 'flex-start'}}>
+                    <Logo />
+                </Typography>
                 <Toolbar variant='regular'>
                     {links.map((link) => {
                         return <Button 
                                     key={link.key} 
                                     href={link.href} 
-                                    data-id={link.dataId}
                                     type='button'
                                     onClick={handleLinkClick}>
-                                {link.value}</Button>
+                                    {link.value}
+                                </Button>
                     })}
                 </Toolbar>
         </AppBar>

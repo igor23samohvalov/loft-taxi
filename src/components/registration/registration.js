@@ -1,20 +1,17 @@
 import React from 'react';
-import './registration.css';
 import PropTypes from 'prop-types';
-import {Paper, Grid, Button, Link, TextField, Typography, FormControl} from '@material-ui/core'
+import {Paper, Grid, Button, Link, TextField, Typography} from '@material-ui/core'
 
 function Registration(props) {
 
-    // let handleLinkClick = (event) => {
-    //     event.preventDefault();
-    //     const {target} = event;
+    let handleLinkClick = (event) => {
+        event.preventDefault();
+        const {target} = event;
 
-    //     const {onClick} = props;
+        const {onSwitch} = props;
 
-    //     if (target && onClick) {
-    //         onClick(event)
-    //     }
-    // }
+        target && onSwitch ? onSwitch(event) : console.log('error')
+    }
 
     let handleSubmit = (event) => {
         event.preventDefault();   
@@ -22,12 +19,12 @@ function Registration(props) {
     }
 
     return (
-        <Paper className='authorization-container' data-testid='authTest'>
-            <Grid container alignContent='center' direction='column' justify='space-evenly' style={{height: '100%'}}>
+        <Paper data-testid='authTest' style={{padding: '40px 55px'}}>
+            <Grid container alignContent='center' direction='column' justify='space-between' style={{height: '436px'}}>
                 <Typography
                     variant='h4'
                 >Регистрация</Typography>
-                <Typography>Уже зарегистрированы? <Link href='#' data-id='toAuthorization' onClick={props.onSwtich}>Войти</Link></Typography>
+                <Typography>Уже зарегистрированы? <Link href='#' data-id='toAuthorization' onClick={handleLinkClick}>Войти</Link></Typography>
                 <form 
                     action='' 
                     id='registration' 
@@ -35,41 +32,45 @@ function Registration(props) {
                     onSubmit={handleSubmit} 
                     href='#'
                 >
-                    <TextField 
-                        fullWidth
-                        type='text' 
-                        label='Адрес электронной почты *'
-                        placeholder='Адрес электронной почты'></TextField>
-                    <div className='inlineInput'>
+                    <Grid container direction='column' justify='space-between' style={{height: '220px'}}>
                         <TextField 
+                            fullWidth
                             type='text' 
-                            label='Имя *'
-                            placeholder='Имя'></TextField>
+                            label='Адрес электронной почты *'
+                            placeholder='Адрес электронной почты'></TextField>
+                        <Grid>
+                            <TextField 
+                                style={{marginRight: '15px'}}
+                                type='text' 
+                                label='Имя *'
+                                placeholder='Имя'></TextField>
+                            <TextField 
+                                type='text'
+                                label='Фамилия *'
+                                placeholder='Фамилия'></TextField>
+                        </Grid>
                         <TextField 
-                            type='text'
-                            label='Фамилия *'
-                            placeholder='Фамилия'></TextField>
-                    </div>
-                    <TextField 
                             fullWidth
                             type='text' 
                             label='Пароль *'
-                            placeholder='Пароль'></TextField>
+                            placeholder='Пароль'>
+                        </TextField>
+                    </Grid>
                 </form>
-                <div className='button'><Button 
+                <Grid item style={{alignSelf: 'flex-end'}}><Button 
                         type='submit' 
                         form='registration'
                         color='primary'
                         variant='contained'
                     >Зарегистрироваться</Button>
-                </div>
+                </Grid>
             </Grid>
         </Paper>
     )
 }
 
 Registration.propTypes = {
-    onSwtich: PropTypes.func.isRequired
+    onSwitch: PropTypes.func.isRequired
 }
 
 export default Registration

@@ -10,8 +10,8 @@ const logPages = {
 function Logged(props) {
     const [page, setPage] = useState(props.initialPage);
 
-    let loggedPageHandler = (e) => {
-        setPage(e.target.textContent)
+    let loggedPageHandler = (page) => {
+        setPage(page)
     }
 
     let CurrentLoggedPage = logPages[page];

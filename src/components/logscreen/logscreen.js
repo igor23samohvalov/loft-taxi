@@ -21,7 +21,7 @@ function LogScreen(props) {
     return (
         <Grid container alignItems='center' justify='space-evenly' style={{height: '100vh'}}>
             <Logo />
-            <CurrentLoginPage onSwtich={loginPageHandler} />
+            <CurrentLoginPage onSwitch={loginPageHandler} />
         </Grid>
     )
 }
