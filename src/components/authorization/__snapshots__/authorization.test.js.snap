@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`authorization renders correctly 1`] = `
+<div>
+  <div
+    class="authorization-container"
+    data-testid="authTest"
+  >
+    <h4
+      class="MuiTypography-root MuiTypography-h4"
+    >
+      Войти
+    </h4>
+    <form
+      action=""
+      data-id="toMap"
+      href="#"
+      id="authorization"
+      required=""
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        Новый пользователь? 
+        <a
+          class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+          data-id="toRegistration"
+          href="#registration"
+        >
+          Зарегистрируйтесь
+        </a>
+      </p>
+      <div
+        class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+          data-shrink="false"
+        >
+          Имя пользователя *
+        </label>
+        <div
+          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiInput-input"
+            placeholder="Имя пользователя"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+          data-shrink="false"
+        >
+          Пароль *
+        </label>
+        <div
+          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiInput-input"
+            placeholder="Пароль"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </form>
+    <div
+      class="button"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+        form="authorization"
+        tabindex="0"
+        type="submit"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Войти
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

@@ -1,8 +1,17 @@
 import React, {useContext} from 'react';
 import './header.css';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 import { AuthContext } from '../../AuthContext';
-import {AppBar, Link} from '@material-ui/core'
+import {AppBar, Toolbar, Button} from '@material-ui/core'
+import {Logo} from 'loft-taxi-mui-theme'
+
+const useStyles = makeStyles({
+    root: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    }
+})
 
 const links = [
     {
@@ -28,35 +37,43 @@ const links = [
 function Header(props) {
     const value = useContext(AuthContext); 
 
+    const classes = useStyles();
+
     let handleLinkClick = (event) => {
         const {target} = event;
 
-        const {onClick} = props;
+        const {onSwitch} = props;
 
-        if (target && onClick) {
-            if (target.dataset.id === 'toLogScreen') {
+        if (target && onSwitch) {
+            if (target.textContent === 'Выйти') {
                 value.logout();
-            } 
-            onClick(event)
+            } else {
+                onSwitch(event)
+            }
         }
     }
+
     return (
-        <AppBar color="default">
-            {links.map((link) => {
-                return <Link key={link.key} 
-                        href={link.href} 
-                        data-id={link.dataId} 
-                        onClick={handleLinkClick}
-                        >{link.value}
-                    </Link>
-            })}
+        <AppBar color='inherit' position='static' classes={{root: classes.root}}>
+                <Logo />
+                <Toolbar variant='regular'>
+                    {links.map((link) => {
+                        return <Button 
+                                    key={link.key} 
+                                    href={link.href} 
+                                    data-id={link.dataId}
+                                    type='button'
+                                    onClick={handleLinkClick}>
+                                {link.value}</Button>
+                    })}
+                </Toolbar>
         </AppBar>
     )
 }
 
 
 Header.propTypes = {
-    onClick: PropTypes.func.isRequired
+    onSwitch: PropTypes.func.isRequired
 }
 
 export default Header

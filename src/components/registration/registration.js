@@ -1,38 +1,75 @@
 import React from 'react';
 import './registration.css';
 import PropTypes from 'prop-types';
-import {Paper, Grid, Button, Link, TextField, Typography, Input} from '@material-ui/core'
+import {Paper, Grid, Button, Link, TextField, Typography, FormControl} from '@material-ui/core'
 
 function Registration(props) {
 
-    let handleLinkClick = (event) => {
-        event.preventDefault();
-        const {target} = event;
+    // let handleLinkClick = (event) => {
+    //     event.preventDefault();
+    //     const {target} = event;
 
-        const {onClick} = props;
+    //     const {onClick} = props;
 
-        if (target && onClick) {
-            onClick(event)
-        }
+    //     if (target && onClick) {
+    //         onClick(event)
+    //     }
+    // }
+
+    let handleSubmit = (event) => {
+        event.preventDefault();   
+        props.onSwtich(event);
     }
 
     return (
-        <form action='' id='registration' href='#'>
-            <Typography>Регистрация</Typography>
-            <p>Уже зарегистрированы? <Link href='#' data-id='toMap' onClick={props.onMap}>На карту без авторизации</Link></p>
-            <Input type='text' placeholder='Адрес электронной почты*'></Input>
-            <div>
-                <Input type='text' placeholder='Имя*'></Input>
-                <Input type='text' placeholder='Фамилия*'></Input>
-            </div>
-            <Input type='text' placeholder='Пароль*'></Input>
-            <button type='submit' form='registration' data-id='toAuthorization' onClick={handleLinkClick}>Зарегистрироваться</button>
-        </form>
+        <Paper className='authorization-container' data-testid='authTest'>
+            <Grid container alignContent='center' direction='column' justify='space-evenly' style={{height: '100%'}}>
+                <Typography
+                    variant='h4'
+                >Регистрация</Typography>
+                <Typography>Уже зарегистрированы? <Link href='#' data-id='toAuthorization' onClick={props.onSwtich}>Войти</Link></Typography>
+                <form 
+                    action='' 
+                    id='registration' 
+                    data-id='toAuthorization' 
+                    onSubmit={handleSubmit} 
+                    href='#'
+                >
+                    <TextField 
+                        fullWidth
+                        type='text' 
+                        label='Адрес электронной почты *'
+                        placeholder='Адрес электронной почты'></TextField>
+                    <div className='inlineInput'>
+                        <TextField 
+                            type='text' 
+                            label='Имя *'
+                            placeholder='Имя'></TextField>
+                        <TextField 
+                            type='text'
+                            label='Фамилия *'
+                            placeholder='Фамилия'></TextField>
+                    </div>
+                    <TextField 
+                            fullWidth
+                            type='text' 
+                            label='Пароль *'
+                            placeholder='Пароль'></TextField>
+                </form>
+                <div className='button'><Button 
+                        type='submit' 
+                        form='registration'
+                        color='primary'
+                        variant='contained'
+                    >Зарегистрироваться</Button>
+                </div>
+            </Grid>
+        </Paper>
     )
 }
 
 Registration.propTypes = {
-    onClick: PropTypes.func.isRequired
+    onSwtich: PropTypes.func.isRequired
 }
 
 export default Registration

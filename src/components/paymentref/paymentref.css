@@ -1,0 +1,11 @@
+.payment-container {
+    position: absolute;
+    top: 120px;
+    left: 20px;
+    padding: 44px 60px;
+}
+
+.payment-container-grid {
+    height: 200px;
+    width: 180px;
+}

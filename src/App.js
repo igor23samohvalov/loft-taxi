@@ -1,28 +1,15 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import LogScreen from './components/logscreen/logscreen.js';
-import Map from './components/map/map.js';
-import Profile from './components/profile/profile.js';
+import Logged from './components/logged/logged.js';
 import './App.css';
-
-const pages = {
-    'toLogScreen': LogScreen,
-    'toMap': Map,
-    'toProfile': Profile 
-}
+import { AuthContext } from './AuthContext.js';
 
 function App() {
-    const [page, setPage] = useState('toLogScreen');
-
-    let pageHandler = (e) => {
-        setPage(e.target.dataset.id)
-        console.log(e.target.dataset.id)
-    }
-
-    let CurrentPage = pages[page];
+    const value = useContext(AuthContext);
 
     return (
         <div className='main-container'>
-            <CurrentPage onClick={pageHandler}/>
+            {value.isLoggedIn ? <Logged /> : <LogScreen />}
         </div>
     )
 }

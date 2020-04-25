@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import Authorization from '../authorization/authorization.js';
 import Registration from '../registration/registration.js';
-import './logscreen.css';
-import PropTypes from 'prop-types';
+import {Grid} from '@material-ui/core';
+import {Logo} from 'loft-taxi-mui-theme'
 
 const loginPages = {
     'toAuthorization': Authorization,
@@ -10,8 +10,8 @@ const loginPages = {
 }
 
 function LogScreen(props) {
-    const [page, setPage] = useState('toAuthorization');
-    
+    const [page, setPage] = useState(props.initialPage);
+
     let loginPageHandler = (e) => {
         setPage(e.target.dataset.id)
     }
@@ -19,14 +19,16 @@ function LogScreen(props) {
     let CurrentLoginPage = loginPages[page];
 
     return (
-        <div>
-            <CurrentLoginPage onClick={loginPageHandler} onMap={props.onClick}/>
-        </div>
+        <Grid container alignItems='center' justify='space-evenly' style={{height: '100vh'}}>
+            <Logo />
+            <CurrentLoginPage onSwtich={loginPageHandler} />
+        </Grid>
     )
 }
 
-LogScreen.propTypes = {
-    onClick: PropTypes.func.isRequired
+LogScreen.defaultProps = {
+    pages: loginPages,
+    initialPage: 'toAuthorization'
 }
 
 export default LogScreen;

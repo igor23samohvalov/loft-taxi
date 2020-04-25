@@ -1,21 +1,41 @@
-.profile-container {
+/* .profile-container {
     width: 752px;
     padding: 44px 60px;
     margin: auto;
     border: 1px solid #333;
     background-color: #fff;
-  }
+  } */
   
-  .profile {
+  /* .profile {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     width: 632px;
     height: 369px;
+  } */
+  .profile-container {
+    padding: 44px 60px;
+    margin-top: 60px;
   }
-  
-  #profileForm {
+  .papers {
+    width: 342px;
+    height: 190px;
+    padding: 20px;
+  }
+
+  .profile-pay {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color: rgba(0, 0, 0, 0.54);
+    margin-bottom: 40px;
+  }
+
+  .hey {
+
+    height: 320px;
+  }
+
+  /* #profileForm {
     display: flex;
     align-content: space-around;
   }
@@ -25,4 +45,4 @@
     height: 157px;
     padding: 16px 32px;
     border: 1px solid #333;
-  }
+  } */

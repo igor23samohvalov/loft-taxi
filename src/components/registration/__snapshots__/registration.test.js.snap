@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`registration renders correctly 1`] = `
+<div>
+  <div
+    class="registration-container"
+    data-testid="regTest"
+  >
+    <h4
+      class="MuiTypography-root MuiTypography-h4"
+    >
+      Регистрация
+    </h4>
+    <p
+      class="MuiTypography-root MuiTypography-body1"
+    >
+      Уже зарегистрированы? 
+      <a
+        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+        data-id="toAuthorization"
+        href="#"
+      >
+        Войти
+      </a>
+    </p>
+    <form
+      action=""
+      data-id="toAuthorization"
+      href="#"
+      id="registration"
+    >
+      <div
+        class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+          data-shrink="false"
+        >
+          Адрес электронной почты *
+        </label>
+        <div
+          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiInput-input"
+            placeholder="Адрес электронной почты"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="inlineInput"
+      >
+        <div
+          class="MuiFormControl-root MuiTextField-root"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+            data-shrink="false"
+          >
+            Имя *
+          </label>
+          <div
+            class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+          >
+            <input
+              aria-invalid="false"
+              class="MuiInputBase-input MuiInput-input"
+              placeholder="Имя"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="MuiFormControl-root MuiTextField-root"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+            data-shrink="false"
+          >
+            Фамилия *
+          </label>
+          <div
+            class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+          >
+            <input
+              aria-invalid="false"
+              class="MuiInputBase-input MuiInput-input"
+              placeholder="Фамилия"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+          data-shrink="false"
+        >
+          Пароль *
+        </label>
+        <div
+          class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiInput-input"
+            placeholder="Пароль"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </form>
+    <div
+      class="button"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+        form="registration"
+        tabindex="0"
+        type="submit"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Зарегистрироваться
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
