@@ -1,32 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Map from '../map/map.js';
 import Profile from '../profile/profile.js';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-const logPages = {
-    'Карта': Map,
-    'Профиль': Profile
-}
-
-function Logged(props) {
-    const [page, setPage] = useState(props.initialPage);
-
-    let loggedPageHandler = (page) => {
-        setPage(page)
-    }
-
-    let CurrentLoggedPage = logPages[page];
+function Logged() {
 
     return (
         <div>
-            <CurrentLoggedPage onSwitch={loggedPageHandler} />
+            {/* {!value.isLoggedIn ? <Redirect to='/' /> :  */}
+                <Switch>
+                    <Route exact path='/logged' component={Map}/>
+                    <Route path ='/logged/profile' component={Profile}/>
+                </Switch>
+            {/* } */}
         </div>
     )
 }
-
-Logged.defaultProps = {
-    pages: logPages,
-    initialPage: 'Карта'
-}
-
 
 export default Logged

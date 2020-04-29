@@ -1,6 +1,6 @@
 import React from 'react';
 import {Paper, Grid, Button, Typography} from '@material-ui/core';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const paymentContainer = {
     position: 'absolute',
@@ -12,15 +12,6 @@ const paymentContainer = {
 }
 
 function PaymentRef(props) {
-    let handleLinkClick = (event) => {
-        const {target} = event;
-        
-        const {onSwitch} = props;
-        
-        if (target.textContent === 'Перейти в профиль' && onSwitch) {
-            onSwitch('Профиль')
-        } 
-    }
     
     return (
         <Paper style={paymentContainer}>
@@ -29,20 +20,15 @@ function PaymentRef(props) {
                     Заполните платежные данные
                 </Typography>
                 <p>Укажите информацию о банковской карте, чтобы сделать заказ.</p>
-                <Button
+                <Link to='/logged/profile'><Button
                     color='primary'
                     variant='contained'
                     type='button'
                     data-id='Профиль'
-                    onClick={handleLinkClick}
-                >Перейти в профиль</Button>
+                >Перейти в профиль</Button></Link>
             </Grid>
         </Paper>
     )
-}
-
-PaymentRef.propTypes = {
-    onSwitch: PropTypes.func.isRequired
 }
 
 export default PaymentRef

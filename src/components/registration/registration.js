@@ -1,30 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Paper, Grid, Button, Link, TextField, Typography} from '@material-ui/core'
+import {Paper, Grid, Button, TextField, Typography} from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import {Logo} from 'loft-taxi-mui-theme';
 
-function Registration(props) {
-
-    let handleLinkClick = (event) => {
-        event.preventDefault();
-        const {target} = event;
-
-        const {onSwitch} = props;
-
-        target && onSwitch ? onSwitch(event) : console.log('error')
-    }
+function Registration() {
 
     let handleSubmit = (event) => {
         event.preventDefault();   
-        props.onSwtich(event);
     }
 
     return (
+        <Grid container alignItems='center' justify='space-evenly' style={{height: '100vh'}}>
+        <Logo />
         <Paper data-testid='authTest' style={{padding: '40px 55px'}}>
             <Grid container alignContent='center' direction='column' justify='space-between' style={{height: '436px'}}>
                 <Typography
                     variant='h4'
                 >Регистрация</Typography>
-                <Typography>Уже зарегистрированы? <Link href='#' data-id='toAuthorization' onClick={handleLinkClick}>Войти</Link></Typography>
+                <Typography>Уже зарегистрированы? <Link to='/'>Войти</Link></Typography>
                 <form 
                     action='' 
                     id='registration' 
@@ -57,20 +50,18 @@ function Registration(props) {
                         </TextField>
                     </Grid>
                 </form>
-                <Grid item style={{alignSelf: 'flex-end'}}><Button 
+                <Grid item style={{alignSelf: 'flex-end'}}>
+                    <Link to='/'><Button 
                         type='submit' 
                         form='registration'
                         color='primary'
                         variant='contained'
-                    >Зарегистрироваться</Button>
+                    >Зарегистрироваться</Button></Link>
                 </Grid>
             </Grid>
         </Paper>
+        </Grid>
     )
-}
-
-Registration.propTypes = {
-    onSwitch: PropTypes.func.isRequired
 }
 
 export default Registration

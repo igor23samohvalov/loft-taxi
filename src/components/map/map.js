@@ -17,9 +17,9 @@ function Map(props) {
         
     return (
         <>
-            <Header onSwitch={props.onSwitch}/>
+            <Header />
             <div style={{height: '100vh'}} ref={mapRef}/>
-            <PaymentRef onSwitch={props.onSwitch}/>
+            <PaymentRef />
         </>
     )
 }

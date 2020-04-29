@@ -5,15 +5,11 @@ import App from './App';
 import { theme } from "loft-taxi-mui-theme";
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import * as serviceWorker from './serviceWorker';
-import { AuthProvider} from './AuthContext.js';
-
 
 ReactDOM.render(
     <React.StrictMode>
         <MuiThemeProvider theme={theme}>
-            <AuthProvider>
-                <App />
-            </AuthProvider>
+            <App />
         </MuiThemeProvider>
     </React.StrictMode>,
     document.getElementById('root')

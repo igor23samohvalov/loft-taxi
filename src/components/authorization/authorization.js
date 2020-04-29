@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
-import {Paper, Grid, Button, Link, TextField, Typography} from '@material-ui/core'
-import PropTypes from 'prop-types';
-import { AuthContext } from '../../AuthContext';
+import React, { useState } from 'react';
+import {Paper, Grid, Button, TextField, Typography} from '@material-ui/core'
+import { Link } from 'react-router-dom';
+import { Logo } from 'loft-taxi-mui-theme';
+import { logIn } from '../../actions.js'
+import { connect } from 'react-redux';
 
 function Authorization(props) {
-    const value = useContext(AuthContext);
-
     const [username, setName] = useState('');
 
     const [password, setPassword] = useState('')
@@ -19,11 +19,27 @@ function Authorization(props) {
     }
 
     let handleSubmit = (event) => {
-        event.preventDefault();   
-        value.login(username, password);
+        event.preventDefault();
+
+        fetch(`https://loft-taxi.glitch.me/auth`, {
+            method: 'POST',
+            body: JSON.stringify({
+                "email": "test5@test.com",
+                "password": "000000"
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(json => console.log(json))
+
+        props.logIn();
     }
 
     return (
+        <Grid container alignItems='center' justify='space-evenly' style={{height: '100vh'}}>
+        <Logo />
         <Paper data-testid='authTest' style={{padding: '40px 55px'}}>
             <Grid container alignContent='center' direction='column' justify='space-between' style={{height: '300px'}}>
                 <Typography variant='h4'>Войти</Typography>
@@ -35,7 +51,7 @@ function Authorization(props) {
                     onSubmit={handleSubmit}
                     required
                 >
-                    <Typography>Новый пользователь? <Link href='#registration' data-id='toRegistration' onClick={handleLinkClick}>Зарегистрируйтесь</Link></Typography>
+                    <Typography>Новый пользователь? <Link to='/registration'>Зарегистрируйтесь</Link></Typography>
                     <TextField 
                         style={{marginBottom: '25px', marginTop: '10px'}}
                         label='Имя пользователя *'
@@ -58,11 +74,20 @@ function Authorization(props) {
                 </Grid>
             </Grid>
         </Paper>
+        </Grid>
     )
 }
 
-Authorization.propTypes = {
-    onSwitch: PropTypes.func.isRequired
+const mapStateToProp = state => {
+    return {
+        isLoggedIn: state.isLoggedIn
+    }
 }
 
-export default Authorization
+const mapDispatchToProps = dispatch => {
+    return {
+        logIn: () => dispatch(logIn())
+    }
+}
+
+export default connect(mapStateToProp, mapDispatchToProps)(Authorization)
