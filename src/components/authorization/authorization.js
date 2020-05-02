@@ -66,7 +66,7 @@ const mapStateToProp = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        logInRequest: () => dispatch(logInRequest())
+        logInRequest: (username, password) => dispatch(logInRequest({username, password}))
     }
 }
 

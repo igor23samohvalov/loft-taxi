@@ -32,7 +32,9 @@ function App(props) {
 const mapStateToProp = state => {
 
     return {
-        isLoggedIn: state.isLoggedIn
+        isLoggedIn: state.isLoggedIn,
+        username: state.username,
+        password: state.password
     }
 }
 
