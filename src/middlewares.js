@@ -5,8 +5,8 @@ export const logMiddleware = store => next => action => {
         fetch(`https://loft-taxi.glitch.me/auth`, {
             method: 'POST',
             body: JSON.stringify({
-                "email": "test5@test.com",
-                "password": "000000"
+                "email": `${localStorage.getItem('name')}`,
+                "password": `${localStorage.getItem('password')}`
             }),
             headers: {
                 'Content-type': 'application/json'
@@ -15,7 +15,7 @@ export const logMiddleware = store => next => action => {
         .then(response => response.json())
         .then(data => {
             data.success ? store.dispatch(logIn()) : console.log(data.error)
-            
+            console.log(data)
         })
         .catch(error => {
             console.log(error)
