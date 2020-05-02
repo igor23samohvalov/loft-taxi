@@ -2,39 +2,19 @@ import React, { useState } from 'react';
 import {Paper, Grid, Button, TextField, Typography} from '@material-ui/core'
 import { Link } from 'react-router-dom';
 import { Logo } from 'loft-taxi-mui-theme';
-import { logIn } from '../../actions.js'
+import { logInRequest } from '../../actions.js'
 import { connect } from 'react-redux';
 
 function Authorization(props) {
-    const [username, setName] = useState('');
+    const [username, setName] = useState(localStorage.getItem('name'));
 
-    const [password, setPassword] = useState('')
-
-    let handleLinkClick = (event) => {
-        const {target} = event;
-        
-        const {onSwitch} = props;
-
-        target.dataset.id === 'toRegistration' && onSwitch ? onSwitch(event) : console.log('error')
-    }
+    const [password, setPassword] = useState(localStorage.getItem('password'))
 
     let handleSubmit = (event) => {
         event.preventDefault();
-
-        fetch(`https://loft-taxi.glitch.me/auth`, {
-            method: 'POST',
-            body: JSON.stringify({
-                "email": "test5@test.com",
-                "password": "000000"
-            }),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(json => console.log(json))
-
-        props.logIn();
+        localStorage.setItem('name', username);
+        localStorage.setItem('password', password);
+        props.logInRequest(username, password);
     }
 
     return (
@@ -86,7 +66,7 @@ const mapStateToProp = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        logIn: () => dispatch(logIn())
+        logInRequest: () => dispatch(logInRequest())
     }
 }
 

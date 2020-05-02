@@ -5,11 +5,21 @@ import App from './App';
 import { theme } from "loft-taxi-mui-theme";
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import * as serviceWorker from './serviceWorker';
+import { Provider} from 'react-redux';
+import createStore from './store.js';
+import { BrowserRouter } from 'react-router-dom';
+
+
+let store = createStore();
 
 ReactDOM.render(
     <React.StrictMode>
         <MuiThemeProvider theme={theme}>
-            <App />
+            <Provider store={store}>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </Provider>
         </MuiThemeProvider>
     </React.StrictMode>,
     document.getElementById('root')

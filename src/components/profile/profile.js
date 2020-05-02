@@ -1,26 +1,13 @@
 import React from 'react';
 import Header from '../header/header.js';
 import {Paper, Grid, Button, FormLabel, Typography, TextField, FormControl} from '@material-ui/core'
+import { connect } from 'react-redux';
+import { saveCardDataRequest } from '../../actions.js'
 
 function Profile(props) {
     let handleSubmit = (event) => {
         event.preventDefault();
-        
-        fetch(`https://loft-taxi.glitch.me/card`, {
-            method: 'POST',
-            body: JSON.stringify({
-                "cardNumber": "2000 0000 0000 0000",
-                "expiryDate": "01/22",
-                "cardName": "TEST",
-                "cvc": "910",
-                "token": "AUTH_TOKEN"
-            }),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(json => console.log(json))
+        props.saveCardDataRequest();
     }
 
     return (
@@ -111,4 +98,16 @@ function Profile(props) {
     )
 }
 
-export default Profile;
+const mapStateToProp = state => {
+    return {
+        isLoggedIn: state.isLoggedIn
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        saveCardDataRequest: () => dispatch(saveCardDataRequest())
+    }
+}
+
+export default connect(mapStateToProp, mapDispatchToProps)(Profile)

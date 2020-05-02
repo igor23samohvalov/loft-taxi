@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button, Typography} from '@material-ui/core'
 import { Logo} from 'loft-taxi-mui-theme'
 import { Link } from 'react-router-dom';
-import { logOut } from '../../actions.js'
+import { logOutRequest } from '../../actions.js'
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles({
@@ -28,18 +28,6 @@ const links = [
 
 function Header(props) {
     const classes = useStyles();
-    console.log(props)
-    // let handleLinkClick = (event) => {
-    //     const {target} = event;
-
-    //     const {onSwitch} = props;
-
-    //     if (target && onSwitch) {
-    //         if (target.textContent === 'Выйти') {
-    //             value.logout();
-    //         }
-    //     } 
-    // }
 
     return (
         <AppBar color='inherit' position='static' classes={{root: classes.root}}>
@@ -53,7 +41,7 @@ function Header(props) {
                                     {link.value}
                                 </Button></Link>
                     })}
-                    <Link to='/'><Button type='button' onClick={props.logOut}>Выйти</Button></Link>
+                    <Link to='/'><Button type='button' onClick={props.logOutRequest}>Выйти</Button></Link>
                 </Toolbar>
         </AppBar>
     )
@@ -67,7 +55,7 @@ const mapStateToProp = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        logIn: () => dispatch(logOut())
+        logOutRequest: () => dispatch(logOutRequest())
     }
 }
 

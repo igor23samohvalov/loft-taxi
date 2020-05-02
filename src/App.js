@@ -1,32 +1,39 @@
 import React from 'react';
-import Logged from './components/logged/logged.js';
+import Profile from './components/profile/profile.js';
+import Map from './components/map/map.js'
 import './App.css';
-import { BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
+import { Route, Redirect, Switch} from 'react-router-dom';
 import Authorization from './components/authorization/authorization.js';
-import Registration from './components/registration/registration.js'
-import logSwitcher from './reducers/logReducer.js';
-import { Provider} from 'react-redux';
-import { createStore } from 'redux';
+import Registration from './components/registration/registration.js';
+import { connect } from 'react-redux';
 
-let store = createStore(logSwitcher);
 
-function App() {
+function App(props) {
 
     return (
-        <Provider store={store}>
-            <Router>
-                <div className='main-container'>
-                    <Switch>
-                        <Route exact path="/" component={Authorization}>
-                            {store.getState().isLoggedIn ? <Redirect to='/logged' /> : <Authorization />}
-                        </Route>
-                        <Route path='/registration' component={Registration} />
-                        <Route path='/logged' component={Logged}/>
-                    </Switch>
-                </div>
-            </Router>
-        </Provider>
+        <div className='main-container'>
+            {props.isLoggedIn ? (
+                <Switch>
+                    <Route exact path='/logged' component={Map}/>
+                    <Route path='/logged/profile' component={Profile}/>
+                    <Redirect to='/logged'/>
+                </Switch>
+            ) : (
+                <Switch>
+                    <Route exact path="/" component={Authorization}/>
+                    <Route path='/registration' component={Registration}/>
+                    <Redirect to='/'/>
+                </Switch>
+            )}
+        </div>
     )
 }
 
-export default App;
+const mapStateToProp = state => {
+
+    return {
+        isLoggedIn: state.isLoggedIn
+    }
+}
+
+export default connect(mapStateToProp)(App)
