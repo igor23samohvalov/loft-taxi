@@ -18,7 +18,7 @@ function Map(props) {
     return (
         <>
             <Header />
-            <div style={{height: '100vh'}} ref={mapRef}/>
+            <div style={{height: '100vh'}} ref={mapRef} data-testid='mapTest'/>
             <PaymentRef />
         </>
     )
