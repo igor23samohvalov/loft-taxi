@@ -20,7 +20,7 @@ function App(props) {
                 </Switch>
             ) : (
                 <Switch>
-                    <Route exact path="/" component={Authorization}/>
+                    <Route exact path="/" render={() => <Authorization username={props.username} password={props.password}/>}/>
                     <Route path='/registration' component={Registration}/>
                     <Redirect to='/'/>
                 </Switch>
@@ -32,9 +32,7 @@ function App(props) {
 const mapStateToProp = state => {
 
     return {
-        isLoggedIn: state.isLoggedIn,
-        username: state.username,
-        password: state.password
+        isLoggedIn: state.isLoggedIn
     }
 }
 

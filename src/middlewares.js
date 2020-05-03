@@ -1,9 +1,13 @@
-import {logIn, logInRequest, logOut, logOutRequest, saveCardDataRequest} from './actions.js'
+import {logIn, logInRequest, logOut, logOutRequest, saveCardData, saveCardDataRequest} from './actions.js'
 
 export const logMiddleware = store => next => (action) => {
     if (action.type === logInRequest.toString()) {
-        let username = action.payload.username;
-        let password = action.payload.password;
+        let username = action.payload.username,
+            password = action.payload.password;
+
+        localStorage.setItem('name', username);
+        localStorage.setItem('password', password);
+
         fetch(`https://loft-taxi.glitch.me/auth`, {
             method: 'POST',
             body: JSON.stringify({
@@ -30,13 +34,19 @@ export const logMiddleware = store => next => (action) => {
 
 export const cardDataMiddleware = store => next => action => {
     if (action.type === saveCardDataRequest.toString()) {
+        console.log(action)
+        let cardnumber = action.payload.cardnumber,
+            expirydate = action.payload.expirydate,
+            cardname = action.payload.cardname,
+            cvc = action.payload.CVC;
+
         fetch(`https://loft-taxi.glitch.me/card`, {
             method: 'POST',
             body: JSON.stringify({
-                "cardNumber": "2000 0000 0000 0000",
-                "expiryDate": "01/22",
-                "cardName": "TEST",
-                "cvc": "910",
+                "cardNumber": `${cardnumber}`,
+                "expiryDate": `${expirydate}`,
+                "cardName": `${cardname}`,
+                "cvc": `${cvc}`,
                 "token": "AUTH_TOKEN"
             }),
             headers: {
@@ -45,6 +55,7 @@ export const cardDataMiddleware = store => next => action => {
         })
         .then(response => response.json())
         .then(data => {
+            data.success ? store.dispatch(saveCardData({cardnumber, expirydate, cardname, cvc})) : console.log(data.error)
             console.log(data)
         })
         .catch(error => {

@@ -49,9 +49,7 @@ function Header(props) {
 
 const mapStateToProp = state => {
     return {
-        isLoggedIn: state.isLoggedIn,
-        username: state.username,
-        password: state.password
+        isLoggedIn: state.isLoggedIn
     }
 }
 

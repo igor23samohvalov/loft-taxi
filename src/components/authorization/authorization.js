@@ -6,14 +6,12 @@ import { logInRequest } from '../../actions.js'
 import { connect } from 'react-redux';
 
 function Authorization(props) {
-    const [username, setName] = useState(localStorage.getItem('name'));
+    const [username, setName] = useState(props.username);
 
-    const [password, setPassword] = useState(localStorage.getItem('password'))
+    const [password, setPassword] = useState(props.password)
 
     let handleSubmit = (event) => {
         event.preventDefault();
-        localStorage.setItem('name', username);
-        localStorage.setItem('password', password);
         props.logInRequest(username, password);
     }
 

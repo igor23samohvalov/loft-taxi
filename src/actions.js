@@ -7,5 +7,5 @@ export const logIn = createAction('LOG_IN');
 export const logOutRequest = createAction('LOG_OUT_REQUEST');
 export const logOut = createAction('LOG_OUT');
 export const saveCardDataRequest = createAction('SAVE_CARD_DATA_REQUEST');
+export const saveCardData = createAction('SAVE_CARD_DATA');
 
-logInRequest(123)

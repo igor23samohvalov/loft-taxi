@@ -12,12 +12,16 @@ import { BrowserRouter } from 'react-router-dom';
 
 let store = createStore();
 
+let username = localStorage.getItem('name') ? localStorage.getItem('name') : '';
+
+let password = localStorage.getItem('password') ? localStorage.getItem('password') : ''
+
 ReactDOM.render(
     <React.StrictMode>
         <MuiThemeProvider theme={theme}>
             <Provider store={store}>
                 <BrowserRouter>
-                    <App />
+                    <App username={username} password={password}/>
                 </BrowserRouter>
             </Provider>
         </MuiThemeProvider>
