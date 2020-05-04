@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 
 function App(props) {
-
+ 
     return (
         <div className='main-container'>
             {props.isLoggedIn ? (

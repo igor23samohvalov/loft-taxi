@@ -11,7 +11,7 @@ const paymentContainer = {
     flexWrap: 'wrap',
 }
 
-function PaymentRef(props) {
+function PaymentRef() {
     
     return (
         <Paper style={paymentContainer}>

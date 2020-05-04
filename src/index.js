@@ -10,11 +10,9 @@ import createStore from './store.js';
 import { BrowserRouter } from 'react-router-dom';
 
 
-let store = createStore();
-
-let username = localStorage.getItem('name') ? localStorage.getItem('name') : '';
-
-let password = localStorage.getItem('password') ? localStorage.getItem('password') : ''
+let store = createStore(),
+    username = localStorage.getItem('name') ? localStorage.getItem('name') : '',
+    password = localStorage.getItem('password') ? localStorage.getItem('password') : ''
 
 ReactDOM.render(
     <React.StrictMode>

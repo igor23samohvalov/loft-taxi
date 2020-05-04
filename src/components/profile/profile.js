@@ -13,7 +13,6 @@ function Profile(props) {
 
     const [CVC, setCVC] = useState('')
 
-    console.log(props)
     let handleSubmit = (event) => {
         event.preventDefault();
         let profileData = {cardnumber, expirydate, cardname, CVC}
@@ -68,7 +67,7 @@ function Profile(props) {
                                             <FormControl fullWidth margin='normal'>
                                                 <FormLabel>Срок действия*</FormLabel>
                                                 <TextField 
-                                                    type='number' 
+                                                    type='date' 
                                                     placeholder='00/00'
                                                     onChange={(e) => setExpirydate(e.target.value)}>    
                                                 </TextField>
@@ -88,7 +87,7 @@ function Profile(props) {
                                             <FormControl fullWidth margin='normal'>
                                                 <FormLabel>CVC*</FormLabel>
                                                 <TextField 
-                                                    type='number' 
+                                                    type='number'
                                                     placeholder='CVC'
                                                     onChange={(e) => setCVC(e.target.value)}>
                                                 </TextField>

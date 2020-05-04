@@ -42,7 +42,7 @@ function Authorization(props) {
                     <TextField
                         label='Пароль *'
                         placeholder='Пароль' 
-                        type='text' 
+                        type='password' 
                         fullWidth
                         value={password} onChange={(e) => setPassword(e.target.value)}>
                     </TextField>              

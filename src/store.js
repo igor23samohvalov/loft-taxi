@@ -1,19 +1,25 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { logMiddleware, cardDataMiddleware } from './middlewares.js';
+import createSagaMiddleWare from 'redux-saga';
+import { handleLogRequest, handleCardData } from './sagas.js';
 import logReducer from './reducers/logReducer.js';
+
+const sagaMiddleware = createSagaMiddleWare();
 
 const createAppStore = () => {
     const store = createStore(
         logReducer,
         compose(
-            applyMiddleware(logMiddleware),
-            applyMiddleware(cardDataMiddleware),
+            applyMiddleware(sagaMiddleware),
             window.__REDUX_DEVTOOLS_EXTENSION__
                 ? window.__REDUX_DEVTOOLS_EXTENSION__()
                 : noop => noop,
         ),
     );
 
+    sagaMiddleware.run(handleLogRequest);
+    sagaMiddleware.run(handleCardData);
+    
     return store
 }
 

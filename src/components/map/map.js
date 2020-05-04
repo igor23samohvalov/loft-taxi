@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import Header from '../header/header.js'
 import mapboxgl from 'mapbox-gl';
 import PaymentRef from '../paymentref/paymentref.js'
+import { connect } from 'react-redux';
+import RouteConstructor from '../routecontructor/routeconstructor.js';
 
 mapboxgl.accessToken = `pk.eyJ1Ijoic2FuZHlwbGFua3RvbiIsImEiOiJjazk5Z2M2YjMwMGwzM210NjdybzJsb2dpIn0.5VnHQjX3Hw1YEaR918xOIA`;
 
@@ -14,14 +16,25 @@ function Map(props) {
         style: 'mapbox://styles/mapbox/streets-v9'
         });
     })
-        
+    
     return (
         <>
             <Header />
             <div style={{height: '100vh'}} ref={mapRef} data-testid='mapTest'/>
-            <PaymentRef />
+            {!props.hasPaymentInfo ? (
+                <RouteConstructor />
+            ) : (
+                <PaymentRef />
+            )}
+            
         </>
     )
 }
 
-export default Map
+const mapStateToProp = state => {
+    return {
+        hasPaymentInfo: state.hasPaymentInfo
+    }
+}
+
+export default connect(mapStateToProp)(Map)
