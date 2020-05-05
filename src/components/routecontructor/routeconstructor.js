@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Paper, Grid, Button, TextField, MenuItem} from '@material-ui/core';
+import {Paper, Grid, Button, TextField} from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const routeContainer = {
     position: 'absolute',
@@ -11,18 +12,10 @@ const routeContainer = {
 }
 
 const currencies = [
-    {
-      value: 'Пулково (LED)'
-    },
-    {
-      value: 'Шаверма на Невском'
-    },
-    {
-      value: 'Инфекционная больница им. Боткина'
-    },
-    {
-      value: 'Волковское кладбище'
-    },
+    'Пулково (LED)', 
+    'Шаверма на Невском', 
+    'Инфекционная больница им. Боткина',
+    'Волковское кладбище'
   ];
 
 function RouteConstructor() {
@@ -36,30 +29,18 @@ function RouteConstructor() {
         <Paper style={routeContainer}>
              <form id='route'>
                 <Grid container justify='space-between' direction='column' style={{height: '200px'}}>
-                    <TextField
-                        placeholder='Откуда'
-                        select
-                        type='text'
-                        value={currency}
+                    <Autocomplete
                         onChange={handleChange}
-                        fullWidth>
-                            {currencies.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                {option.value}
-                                </MenuItem>
-                            ))}
-                    </TextField>
-                    <TextField
-                        placeholder='Куда'
-                        select
-                        type='text'
-                        fullWidth>
-                            {currencies.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                {option.value}
-                                </MenuItem>
-                            ))}
-                    </TextField>
+                        id="where-from"
+                        options={currencies}
+                        renderInput={(params) => <TextField {...params} placeholder='Откуда'  variant="outlined" fullWidth/>}
+                    />
+                    <Autocomplete
+                        onChange={handleChange}
+                        id="where"
+                        options={currencies}
+                        renderInput={(params) => <TextField {...params} placeholder='Куда'  variant="outlined" fullWidth/>}
+                    />
                     <Button
                         color='default'
                         variant='contained'
