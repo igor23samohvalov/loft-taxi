@@ -10,8 +10,8 @@ function Authorization(props) {
 
     const [password, setPassword] = useState(props.password)
 
-    let handleSubmit = (event) => {
-        event.preventDefault();
+    let handleSubmit = (e) => {
+        e.preventDefault();
         props.logInRequest(username, password);
     }
 

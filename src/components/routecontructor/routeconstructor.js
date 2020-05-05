@@ -18,34 +18,37 @@ const currencies = [
     'Волковское кладбище'
   ];
 
-function RouteConstructor() {
-    const [currency, setCurrency] = useState('');
+function RouteConstructor(props) {
+    const [whereFrom, setWhereFrom] = useState(''),
+          [where, setWhere] = useState('');
 
-    const handleChange = (event) => {
-        setCurrency(event.target.value);
-    };
+    let  handleSubmit = (e) => {
+        e.preventDefault();
+
+        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${whereFrom}.json?proximity=-30.2860,59.9659&access_token=pk.eyJ1Ijoic2FuZHlwbGFua3RvbiIsImEiOiJjazk5Z2M2YjMwMGwzM210NjdybzJsb2dpIn0.5VnHQjX3Hw1YEaR918xOIA`)
+        .then(response => response.json())
+        .then(data => props.onMapChange(data.features[0].center))
+    }
 
     return (
         <Paper style={routeContainer}>
-             <form id='route'>
+             <form id='route' onSubmit={handleSubmit}>
                 <Grid container justify='space-between' direction='column' style={{height: '200px'}}>
                     <Autocomplete
-                        onChange={handleChange}
                         id="where-from"
                         options={currencies}
-                        renderInput={(params) => <TextField {...params} placeholder='Откуда'  variant="outlined" fullWidth/>}
+                        renderInput={(params) => <TextField {...params} onSelect={(e) => setWhereFrom(e.target.value)} placeholder='Откуда'  variant="outlined" fullWidth/>}
                     />
                     <Autocomplete
-                        onChange={handleChange}
                         id="where"
                         options={currencies}
-                        renderInput={(params) => <TextField {...params} placeholder='Куда'  variant="outlined" fullWidth/>}
+                        renderInput={(params) => <TextField {...params} onSelect={(e) => setWhere(e.target.value)} placeholder='Куда'  variant="outlined" fullWidth/>}
                     />
                     <Button
                         color='default'
                         variant='contained'
                         type='submit'
-                        form='authorization'
+                        form='route'
                     >Вызвать такси</Button>
                 </Grid>
             </form>

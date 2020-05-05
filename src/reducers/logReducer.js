@@ -1,5 +1,5 @@
 const initialState = {
-    isLoggedIn: false,
+    isLoggedIn: true,
     hasPaymentInfo: false
 }
 
@@ -11,7 +11,6 @@ const SAVE_CARD_DATA = 'SAVE_CARD_DATA';
 
 function logSwitcher(state = initialState, action) {
     switch (action.type) {
- 
         case LOG_IN:
             return { 
                 ...state,
