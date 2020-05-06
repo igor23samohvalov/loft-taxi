@@ -1,8 +1,8 @@
 
 
-export const drawRoute = (map, coordinates) => {
+export const drawRoute = (map, coords) => {
     map.flyTo({
-      center: coordinates[0],
+      center: coords[0],
       zoom: 15
     });
    
@@ -16,7 +16,7 @@ export const drawRoute = (map, coordinates) => {
           properties: {},
           geometry: {
             type: "LineString",
-            coordinates
+            coordinates: coords
           }
         }
       },

@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Paper, Grid, Button, TextField, Typography} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import {Logo} from 'loft-taxi-mui-theme';
+import { connect } from 'react-redux';
+import { regRequest } from '../../actions.js'
 
-function Registration() {
+function Registration(props) {
+    const [email, setEmail] = useState('');
 
-    let handleSubmit = (event) => {
-        event.preventDefault();   
+    const [name, setName] = useState('');
+
+    const [surname, setSurname] = useState('')
+
+    const [password, setPassword] = useState('')
+
+    let handleRegistration = () => {
+        let regData = {email, name, surname, password}
+        props.regRequest( regData )
     }
 
     return (
@@ -22,36 +32,39 @@ function Registration() {
                     action='' 
                     id='registration' 
                     data-id='toAuthorization' 
-                    onSubmit={handleSubmit} 
                     href='#'
                 >
                     <Grid container direction='column' justify='space-between' style={{height: '220px'}}>
                         <TextField 
                             fullWidth
-                            type='text' 
+                            onChange={(e) => setEmail(e.target.value)}
+                            type='email' 
                             label='Адрес электронной почты *'
                             placeholder='Адрес электронной почты'></TextField>
                         <Grid>
                             <TextField 
                                 style={{marginRight: '15px'}}
+                                onChange={(e) => setName(e.target.value)}
                                 type='text' 
                                 label='Имя *'
                                 placeholder='Имя'></TextField>
                             <TextField 
                                 type='text'
+                                onChange={(e) => setSurname(e.target.value)}
                                 label='Фамилия *'
                                 placeholder='Фамилия'></TextField>
                         </Grid>
                         <TextField 
                             fullWidth
-                            type='text' 
+                            onChange={(e) => setPassword(e.target.value)}
+                            type='password' 
                             label='Пароль *'
                             placeholder='Пароль'>
                         </TextField>
                     </Grid>
                 </form>
                 <Grid item style={{alignSelf: 'flex-end'}}>
-                    <Link to='/'><Button 
+                    <Link to='/' onClick={handleRegistration}><Button 
                         type='submit' 
                         form='registration'
                         color='primary'
@@ -64,4 +77,16 @@ function Registration() {
     )
 }
 
-export default Registration
+const mapStateToProp = state => {
+    return {
+        isLoggedIn: state.isLoggedIn
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        regRequest: (regData) => dispatch(regRequest(regData))
+    }
+}
+
+export default connect(mapStateToProp, mapDispatchToProps)(Registration)

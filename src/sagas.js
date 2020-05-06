@@ -2,6 +2,7 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 import { 
     logInRequest, logIn, 
     logOutRequest, logOut, 
+    regRequest, regIn,
     saveCardDataRequest, saveCardData } from './actions'
 
 const getLog = (payload) => 
@@ -61,3 +62,30 @@ const getCardData = (payload) =>
     })
     .then(response => response.json())
     .then(data => data)
+
+    export function* handleRegData() {
+        yield takeEvery(regRequest, function* (action){
+            try {
+                const regResult = yield call(getRegData, action.payload);
+                regResult.success ? yield put(regIn(action.payload)) : console.log(regResult)
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    }
+    
+    const getRegData = (payload) => 
+        fetch(`https://loft-taxi.glitch.me/register`, {
+            method: 'POST',
+            body: JSON.stringify({
+                "email": `${payload.email}`,
+                "password": `${payload.password}`,
+                "name": `${payload.name}`,
+                "surname": `${payload.surname}`
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => data)

@@ -1,11 +1,13 @@
 const initialState = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     hasPaymentInfo: false
 }
 
 const LOG_IN = 'LOG_IN';
 
 const LOG_OUT = 'LOG_OUT';
+
+const REG_IN = 'REG_IN';
 
 const SAVE_CARD_DATA = 'SAVE_CARD_DATA';
 
@@ -31,7 +33,17 @@ function logSwitcher(state = initialState, action) {
                 expiryDate: action.payload.expirydate,
                 cardName: action.payload.cardname,
                 CVC: action.payload.CVC
-            }
+            };
+        case REG_IN:
+             return {
+                 ...state,
+                 registrationInfo: {
+                     email: action.payload.email,
+                     name: action.payload.name,
+                     surname: action.payload.surname,
+                     password: action.payload.password,
+                 }
+             }   
         default:
             return state;
     }

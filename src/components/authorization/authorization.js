@@ -25,7 +25,6 @@ function Authorization(props) {
                     action='' 
                     id='authorization' 
                     href='#'
-                    data-id='toMap' 
                     onSubmit={handleSubmit}
                     required
                 >
