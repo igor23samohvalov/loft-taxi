@@ -1,22 +1,37 @@
-import React, { useState } from 'react';
-import {Paper, Grid, Button, TextField, Typography} from '@material-ui/core';
+import React from 'react';
+import {Paper, Grid, Button, Typography} from '@material-ui/core';
+import { TextField } from 'mui-rff';
 import { Link } from 'react-router-dom';
-import {Logo} from 'loft-taxi-mui-theme';
+import { Logo } from 'loft-taxi-mui-theme';
 import { connect } from 'react-redux';
 import { regRequest } from '../../actions.js'
+import { Form } from "react-final-form";
+
+const validate = values => {
+    const errors = {};
+
+    if (!values.email) {
+        errors.email = 'Это обязательное поле';
+    }
+    if (!values.name) {
+        errors.name = 'Это обязательное поле';
+    }
+    if (!values.surname) {
+        errors.surname = 'Это обязательное поле';
+    }
+    if (!values.password) {
+        errors.password = 'Это обязательное поле';
+    }
+    return errors;
+};
 
 function Registration(props) {
-    const [email, setEmail] = useState('');
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-    const [name, setName] = useState('');
-
-    const [surname, setSurname] = useState('')
-
-    const [password, setPassword] = useState('')
-
-    let handleRegistration = () => {
-        let regData = {email, name, surname, password}
-        props.regRequest( regData )
+    let handleSubmit = async values => {
+        await sleep(300);
+        props.regRequest( values )
+        props.history.push('/')
     }
 
     return (
@@ -28,48 +43,56 @@ function Registration(props) {
                     variant='h4'
                 >Регистрация</Typography>
                 <Typography>Уже зарегистрированы? <Link to='/'>Войти</Link></Typography>
-                <form 
-                    action='' 
-                    id='registration' 
-                    data-id='toAuthorization' 
-                    href='#'
-                >
-                    <Grid container direction='column' justify='space-between' style={{height: '220px'}}>
-                        <TextField 
-                            fullWidth
-                            onChange={(e) => setEmail(e.target.value)}
-                            type='email' 
-                            label='Адрес электронной почты *'
-                            placeholder='Адрес электронной почты'></TextField>
-                        <Grid>
-                            <TextField 
-                                style={{marginRight: '15px'}}
-                                onChange={(e) => setName(e.target.value)}
-                                type='text' 
-                                label='Имя *'
-                                placeholder='Имя'></TextField>
-                            <TextField 
-                                type='text'
-                                onChange={(e) => setSurname(e.target.value)}
-                                label='Фамилия *'
-                                placeholder='Фамилия'></TextField>
-                        </Grid>
-                        <TextField 
-                            fullWidth
-                            onChange={(e) => setPassword(e.target.value)}
-                            type='password' 
-                            label='Пароль *'
-                            placeholder='Пароль'>
-                        </TextField>
-                    </Grid>
-                </form>
+                <Form 
+                    onSubmit={handleSubmit}
+                    validate={validate}
+                    render={({ handleSubmit }) => (
+                        <form 
+                            id='registration' 
+                            onSubmit={ handleSubmit }
+                            noValidate
+                        >
+                            <Grid container direction='column' justify='space-between' style={{height: '220px'}}>
+                                <TextField 
+                                    name='email'
+                                    label='Адрес электронной почты'
+                                    placeholder='Адрес электронной почты'
+                                    type='email'
+                                    required={true}
+                                    fullWidth/>
+                                <Grid container style={{flexWrap: 'nowrap'}}>
+                                    <TextField 
+                                        style={{marginRight: '15px'}}
+                                        name='name'
+                                        label='Имя'
+                                        placeholder='Имя'
+                                        type='text'
+                                        required={true}/>
+                                    <TextField 
+                                        name='surname'
+                                        label='Фамилия'
+                                        placeholder='Фамилия'
+                                        type='text'
+                                        required={true}/>
+                                </Grid>
+                                <TextField 
+                                    name='password'
+                                    label='Пароль'
+                                    placeholder='Пароль'
+                                    type='password'
+                                    required={true}
+                                    fullWidth/>
+                            </Grid>
+                        </form>
+                    )}
+                />
                 <Grid item style={{alignSelf: 'flex-end'}}>
-                    <Link to='/' onClick={handleRegistration}><Button 
+                    <Button 
                         type='submit' 
                         form='registration'
                         color='primary'
                         variant='contained'
-                    >Зарегистрироваться</Button></Link>
+                    >Зарегистрироваться</Button>
                 </Grid>
             </Grid>
         </Paper>

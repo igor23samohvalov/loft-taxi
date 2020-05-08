@@ -28,7 +28,6 @@ function NewRoute(props) {
                     color='primary'
                     variant='contained'
                     type='button'
-                    data-id='Профиль'
                     onClick={handleClick}
                 >Сделайте новый заказ</Button>
             </Grid>

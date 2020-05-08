@@ -25,7 +25,7 @@ export function* handleLogRequest() {
         localStorage.setItem('password', action.payload.password);
         try {
             const logResult = yield call(getLog, action.payload);
-            logResult.success ? yield put(logIn(action.payload)) : console.log(logResult)
+            logResult.success ? yield put(logIn(action.payload, logResult.token)) : console.log(logResult)
         } catch (error) {
             console.log(error)
         }
@@ -63,29 +63,29 @@ const getCardData = (payload) =>
     .then(response => response.json())
     .then(data => data)
 
-    export function* handleRegData() {
-        yield takeEvery(regRequest, function* (action){
-            try {
-                const regResult = yield call(getRegData, action.payload);
-                regResult.success ? yield put(regIn(action.payload)) : console.log(regResult)
-            } catch (error) {
-                console.log(error)
-            }
-        })
-    }
+export function* handleRegData() {
+    yield takeEvery(regRequest, function* (action){
+        try {
+            const regResult = yield call(getRegData, action.payload);
+            regResult.success ? yield put(regIn(action.payload)) : console.log(regResult)
+        } catch (error) {
+            console.log(error)
+        }
+    })
+}
     
-    const getRegData = (payload) => 
-        fetch(`https://loft-taxi.glitch.me/register`, {
-            method: 'POST',
-            body: JSON.stringify({
-                "email": `${payload.email}`,
-                "password": `${payload.password}`,
-                "name": `${payload.name}`,
-                "surname": `${payload.surname}`
-            }),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => data)
+const getRegData = (payload) => 
+    fetch(`https://loft-taxi.glitch.me/register`, {
+        method: 'POST',
+        body: JSON.stringify({
+            "email": `${payload.email}`,
+            "password": `${payload.password}`,
+            "name": `${payload.name}`,
+            "surname": `${payload.surname}`
+        }),
+        headers: {
+            'Content-type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => data)

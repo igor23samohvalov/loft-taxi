@@ -15,7 +15,8 @@ const routeContainer = {
 function NewRoute(props) {
     const [whereFrom, setWhereFrom] = useState(''),
           [where, setWhere] = useState(''),
-          [currencies, setCurrencies] = useState([])
+          [currencies, setCurrencies] = useState([]),
+          [isDisabled, setDisable] = useState(false);
 
     useEffect(() => {
         let unmounted = false;
@@ -26,6 +27,14 @@ function NewRoute(props) {
 
         return () => (unmounted = true)
     }, [])
+
+    useEffect(() => {
+        if( whereFrom === '' || where === '') {
+            setDisable(true)
+        } else {
+            setDisable(false)
+        }
+    }, [whereFrom, where])
 
     let handleSubmit = (e) => {
         e.preventDefault();
@@ -51,10 +60,11 @@ function NewRoute(props) {
                         renderInput={(params) => <TextField {...params} onSelect={(e) => setWhere(e.target.value)} placeholder='Куда'  variant="outlined" fullWidth/>}
                     />
                     <Button
-                        color='default'
+                        color='primary'
                         variant='contained'
                         type='submit'
                         form='route'
+                        disabled={isDisabled}
                     >Вызвать такси</Button>
                 </Grid>
             </form>
